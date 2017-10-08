@@ -1,4 +1,9 @@
 defmodule Fastgoblin do
+
+  defmodule ParseError do
+    defexception [:message]
+  end
+
   def parse_line(line) do
     case  line |> parse_tag("owner") do
       {owner, rest} ->
