@@ -9,7 +9,7 @@ defmodule Fastgoblin do
     end
   end
 
-  def parse_enum(binary) when is_binary(binary) do
+  def parse(binary) when is_binary(binary) do
     binary
     |> String.split("\n")
     |> Enum.map(&parse_line(&1))

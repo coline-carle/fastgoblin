@@ -5,5 +5,5 @@ auctions =
 
 Benchee.run(%{
   "poison" => fn -> Poison.Parser.parse!(auctions) end,
-  "fastgoblin" => fn -> Fastgoblin.parse_enum(auctions) end
+  "fastgoblin" => fn -> Fastgoblin.parse(auctions) end
 })
