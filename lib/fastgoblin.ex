@@ -8,7 +8,7 @@ defmodule Fastgoblin do
     case  line |> parse_tag("owner") do
       {owner, rest} ->
         {ownerRealm, _rest} = rest |> parse_tag("ownerRealm")
-        {owner, ownerRealm}
+        {ownerRealm, owner}
       :error ->
         :error
     end
@@ -29,7 +29,7 @@ defmodule Fastgoblin do
           <<_prefix::size(pos)-binary, rest::binary>> ->
             rest |> extract_string
           _ ->
-            raise ParserError, "unexpected escape character in #{inspect line}"
+            raise ParseError, "unexpected escape character in #{inspect line}"
         end
       :nomatch ->
         :error
@@ -45,10 +45,10 @@ defmodule Fastgoblin do
           <<string::size(pos)-binary, rest::binary>> ->
             {string, rest}
           _ ->
-            raise ParserError, "unexpected escape character in #{inspect line}"
+            raise ParseError, "unexpected character in #{inspect line}"
         end
       :nomatch ->
-        raise ParserError, "unexpected escape character in #{inspect line}"
+        raise ParseError, "unexpected character in #{inspect line}"
     end
   end
 end
